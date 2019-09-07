@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <!-- Load the latest version of TensorFlow.js -->
+    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+    <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
+    <script src="https://unpkg.com/@tensorflow-models/knn-classifier"></script>
+  </head>
+  <body>
+    <h1>WELCOME!</h1>
+    <form action="http://127.0.0.1:5000/image">
+      <input type="submit" value="Image Classifier" />
+    </form>
+    <form action="http://127.0.0.1:5000/predictor">
+      <input type="submit" value="Video Predictor" />
+    </form>
+    <form action="http://127.0.0.1:5000/trainer">
+      <input type="submit" value="Training App" />
+    </form>
+  </body>
+</html>

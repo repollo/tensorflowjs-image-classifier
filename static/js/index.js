@@ -1,13 +1,13 @@
-const classifier = knnClassifier.create();
 const webcamElement = document.getElementById('webcam');
 
-let net;
+let train;
 
-async function app() {
+async function trainer() {
+  const classifier = knnClassifier.create();
   console.log('Loading mobilenet..');
 
   // Load the model.
-  net = await mobilenet.load();
+  train = await mobilenet.load();
   console.log('Sucessfully loaded model');
 
   await setupWebcam();
@@ -17,7 +17,7 @@ async function app() {
   const addExample = classId => {
     // Get the intermediate activation of MobileNet 'conv_preds' and pass that
     // to the KNN classifier.
-    const activation = net.infer(webcamElement, 'conv_preds');
+    const activation = train.infer(webcamElement, 'conv_preds');
 
     // Pass the intermediate activation to the classifier.
     classifier.addExample(activation, classId);
@@ -31,7 +31,7 @@ async function app() {
   while (true) {
     if (classifier.getNumClasses() > 0) {
       // Get the activation from mobilenet from the webcam.
-      const activation = net.infer(webcamElement, 'conv_preds');
+      const activation = train.infer(webcamElement, 'conv_preds');
       // Get the most likely class and confidences from the classifier module.
       const result = await classifier.predictClass(activation);
 
@@ -46,51 +46,47 @@ async function app() {
   }
 }
 
+let net;
 
-////////
-////////
-////////
-// async function app() {
-//   console.log('Loading mobilenet..');
-// // Load the model.
-//   net = await mobilenet.load();
-//   console.log('Sucessfully loaded model');
+async function predictor() {
+  console.log('Loading mobilenet..');
+// Load the model.
+  net = await mobilenet.load();
+  console.log('Sucessfully loaded model');
   
-//   await setupWebcam();
-//   while (true) {
-//     const result = await net.classify(webcamElement);
+  await setupWebcam();
+  while (true) {
+    const result = await net.classify(webcamElement);
 
-//     document.getElementById('console').innerText = `
-//       prediction: ${result[0].className}\n
-//       probability: ${result[0].probability}
-//     `;
+    document.getElementById('console').innerText = `
+      prediction: ${result[0].className}\n
+      probability: ${result[0].probability}
+    `;
 
-//     // Give some breathing room by waiting for the next animation frame to
-//     // fire.
-//     await tf.nextFrame();
-//   }
-// }
-////////
-////////
-////////
+    // Give some breathing room by waiting for the next animation frame to
+    // fire.
+    await tf.nextFrame();
+  }
+}
 
-////////
-////////
-////////
-// async function app() {
-//   console.log('Loading mobilenet..');
-//   // Load the model.
-//   net = await mobilenet.load();
-//   console.log('Sucessfully loaded model');
+let imager;
 
-//   // Make a prediction through the model on our image.
-//   const imgEl = document.getElementById('img');
-//   const result = await net.classify(imgEl);
-//   console.log(result);
-// }
-////////
-////////
-////////
+async function image() {
+  console.log('Loading mobilenet..');
+  // Load the model.
+  imager = await mobilenet.load();
+  console.log('Sucessfully loaded model');
+
+  // Make a prediction through the model on our image.
+  const imgEl = document.getElementById('img');
+  const result = await imager.classify(imgEl);
+  document.getElementById('console').innerText = `
+      prediction: ${result[0].className}\n
+    `;
+  console.log(result);
+}
+
+
 var constraints = {video: true };
 
 async function setupWebcam() {
@@ -111,5 +107,3 @@ async function setupWebcam() {
     }
   });
 }
-
-app();
