@@ -1,15 +1,31 @@
-<html>
-  <head>
-    <!-- Load the latest version of TensorFlow.js -->
-    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
-    <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>    
-  </head>
-  <body>
-    <div id="console"></div>
-    <!-- Add an image that we will use to test -->
-    <img id="img" crossOrigin src="static/img/6WPAsG0.jpg" width=227 height=227/>
-    <!-- Load index.js after the content of the page -->
-    <script src="/static/js/index.js"></script>
-    <script>image();</script>
-  </body>
-</html>
+{% extends "base.html" %} {% block content %}
+
+<h2>Image Classifier</h2>
+
+<div>
+    <form id="upload-file" method="post" enctype="multipart/form-data">
+        <label for="imageUpload" class="upload-label">
+            Choose...
+        </label>
+        <input type="file" name="image" id="imageUpload" accept=".png, .jpg, .jpeg">
+    </form>
+
+    <div class="image-section" style="display:none;">
+        <div class="img-preview">
+            <div id="imagePreview">
+            </div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-primary btn-lg " id="btn-predict">Predict!</button>
+        </div>
+    </div>
+
+    <div class="loader" style="display:none;"></div>
+
+    <h3 id="result">
+        <span> </span>
+    </h3>
+
+</div>
+
+{% endblock %}

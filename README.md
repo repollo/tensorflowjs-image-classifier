@@ -14,3 +14,5 @@ $ flask run
 
 
 This is beta software so remember everything might probably come crashing down...
+
+Made with ❤ by repollo from nori-labs.com

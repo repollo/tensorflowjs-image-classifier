@@ -3,12 +3,14 @@
     <!-- Load the latest version of TensorFlow.js -->
     <script src="https://unpkg.com/@tensorflow/tfjs"></script>
     <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
+    <link rel="stylesheet" href="http://127.0.0.1:5000/static/css/w3.css">
+    <link href="http://127.0.0.1:5000/static/css/hooli.css" rel="stylesheet">
   </head>
   <body>
     <div id="console"></div>
     <video autoplay playsinline muted id="webcam" width="224" height="224"></video>
     <!-- Load index.js after the content of the page -->
-    <script src="/static/js/index.js"></script>
+    <script src="http://127.0.0.1:5000/static/js/index.js"></script>
     <script>predictor();</script>
   </body>
 </html>

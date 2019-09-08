@@ -1,9 +1,12 @@
 <html>
   <head>
     <!-- Load the latest version of TensorFlow.js -->
+    <link rel="stylesheet" href="http://127.0.0.1:5000/static/css/w3.css">
+    <link href="http://127.0.0.1:5000/static/css/hooli.css" rel="stylesheet">
     <script src="https://unpkg.com/@tensorflow/tfjs"></script>
     <script src="https://unpkg.com/@tensorflow-models/mobilenet"></script>
     <script src="https://unpkg.com/@tensorflow-models/knn-classifier"></script>
+
   </head>
   <body>
     <div id="console"></div>
@@ -12,7 +15,7 @@
     <button id="class-b">Add B</button>
     <button id="class-c">Add C</button>
     <!-- Load index.js after the content of the page -->
-    <script src="/static/js/index.js"></script>
+    <script src="http://127.0.0.1:5000/static/js/index.js"></script>
     <script>trainer();</script>
   </body>
 </html>
